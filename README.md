@@ -1,7 +1,7 @@
 # STQD6324-Assignment3-P146399
 # 🎬 MovieLens 100k Dataset Analysis Report
 
-![Project cover](images.png)
+![Project cover](images.jpg)
 
 
 ## Project Introduction
