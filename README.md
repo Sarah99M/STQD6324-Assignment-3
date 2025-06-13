@@ -1,64 +1,80 @@
 # STQD6324-Assignment3
 # 🎬 MovieLens 100k Dataset Analysis Report
 
-![项目封面](images/banner.png)
+![Project cover](images.png)
 
 
-## 📘 项目简介
+## Project Introduction
 
-本项目基于 [MovieLens 100k 数据集](https://grouplens.org/datasets/movielens/100k/)，使用 Apache Zeppelin 结合 PySpark 和 Spark SQL 进行电影评分数据分析，探索用户偏好、评分分布等行为模式，回答一系列与推荐系统相关的关键问题。
-
----
-
-## 📂 使用数据集
-
-数据来源于 MovieLens 100k，包括以下三个文件（通过 wget 下载）：
-
-- `u.user`: 用户信息（用户ID, 年龄, 性别, 职业, 邮编）
-- `u.data`: 用户评分记录（用户ID, 电影ID, 评分, 时间戳）
-- `u.item`: 电影信息（电影ID, 电影名称, 类型标签等）
-
-数据上传至 HDFS `/tmp/ml-100k/` 目录，并通过 Spark 加载。
+This assignment uses the [MovieLens 100k dataset](https://grouplens.org/datasets/movielens/100k/) and Apache Zeppelin combined with PySpark and Spark SQL to analyze movie rating data, explore user preferences, rating distribution and other behavioral patterns, and answer a series of key questions related to recommendation systems.
 
 ---
 
-## ⚙️ 技术栈
+## Using the Dataset
+
+The data comes from MovieLens 100k, including the following three files (downloaded via wget):
+
+- `u.user`: user information (user ID, age, gender, occupation, zip code)
+
+- `u.data`: user rating record (user ID, movie ID, rating, timestamp)
+
+- `u.item`: movie information (movie ID, movie name, type label, etc.)
+
+The data is uploaded to the HDFS `/tmp/ml-100k/` directory and loaded through Spark.
+---
+
+## Analysis tools and platforms
 
 - Apache Zeppelin
-- PySpark（RDD 和 DataFrame）
+- PySpark (RDD and DataFrame)
 - Spark SQL
-- HDFS 分布式文件系统
-- Shell + SQL + Markdown 多段式协作
+- HDFS distributed file system
+- Shell + SQL + Markdown multi-stage collaboration
 
 ---
 
-## 🧠 分析目标与问题
+## Problems to be solved
 
-本分析任务旨在回答以下五个核心问题：
+This task aims to answer the following five core questions:
 
-1. 每部电影的平均评分是多少？
-2. 哪些电影的平均评分最高？（排除评分次数少于15次的电影）
-3. 哪些活跃用户（评分数 ≥ 50）偏好哪类电影？
-4. 哪些用户年龄小于 20 岁？
-5. 哪些用户年龄在 30 至 40 岁之间，职业为 scientist？
+1. What is the average rating of each movie?
 
----
+2. Which movies have the highest average rating? (Exclude movies with less than 15 ratings)
 
-## 📈 分析步骤概览
+3. Which active users (ratings ≥ 50) prefer which types of movies?
 
-1. 使用 `%sh` 命令下载并上传原始数据到 HDFS；
-2. 使用 `%pyspark` 将数据读取为 RDD，并转换为结构化的 DataFrame；
-3. 使用 Spark SQL 注册为临时视图（TempView）以便执行 SQL 查询；
-4. 分别编写 SQL 或 PySpark 查询语句完成每个问题的分析；
-5. 输出中间结果并生成解释性 Markdown 总结。
+4. Which users are younger than 20 years old?
+
+5. Which users are between 30 and 40 years old and are scientists?
 
 ---
 
-## 🔍 示例 SQL 查询
+## Overview of analysis steps
 
-计算所有电影的平均评分：
+1. Use the `%sh` command to download and upload raw data to HDFS;
+2. Use `%pyspark` to read data as RDD and convert it to a structured DataFrame;
+3. Use Spark SQL to register as a temporary view (TempView) to execute SQL queries;
+4. Write SQL or PySpark query statements to complete the analysis of each problem;
+5. Output intermediate results and generate an explanatory Markdown summary.
 
-```sql
-SELECT movie_id, AVG(rating) AS avg_rating
-FROM ratings
-GROUP BY movie_id;
+---
+
+## summary
+
+In this data analysis task, using the MovieLens 100k dataset, an analysis environment based on PySpark and Spark SQL was built through Apache Zeppelin to complete the exploration and analysis of user, movie and rating data.
+I first used PySpark to upload the three files u.user, u.data and u.item to HDFS and read them into RDD format.
+
+Then, these RDDs were converted into structured DataFrames and registered as SQL temporary views (Temp View) to facilitate subsequent SQL operations.
+
+Then, in Zeppelin, %pyspark and %sql were combined to write query statements to solve the five problems in the job one by one.
+
+In the processing process, SQL table connections (JOIN) and some aggregate functions (such as AVG, COUNT, GROUP BY, etc.) were mainly used to implement analysis logic, such as calculating the average score, finding high-scoring movies, analyzing user preferences, etc.
+
+I first calculated the average rating of each movie, which laid the foundation for finding high-scoring movies later. Then I filtered and selected only movies with more than 15 ratings to avoid being interfered by "score-brushing" of unpopular movies, and the results were more realistic. Next, we analyzed those active users who rated more than 50 times, and inferred their favorite genres, such as dramas, comedies, etc., based on the types of movies they rated the most. In addition, we also found young user groups under the age of 20, and users between the ages of 30 and 40 who are scientists. These data can help us make more accurate user portraits and personalized recommendations.
+
+---
+
+Assignment3/
+├── Assignment3.json         # Zeppelin export file
+├── README.md             
+└── image.png
