@@ -74,7 +74,9 @@ I first calculated the average rating of each movie, which laid the foundation f
 
 ---
 
-Assignment3/
-├── Assignment3.json         # Zeppelin export file
-├── README.md             
-└── image.png
+## Author Info
+
+- **Name:** MAO JINLIN
+- **Course:** STQD6324 Data Management
+- **Year:** 2025
+- **Institution:** Univerdity Kebangsaan Malaysia
