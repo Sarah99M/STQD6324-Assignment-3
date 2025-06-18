@@ -28,6 +28,7 @@ The data is uploaded to the HDFS `/tmp/ml-100k/` directory and loaded through Sp
 - Apache Zeppelin
 - PySpark (RDD and DataFrame)
 - Spark SQL
+- Cassandra
 - HDFS distributed file system
 - Shell + SQL + Markdown multi-stage collaboration
 
